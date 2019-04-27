@@ -6,9 +6,9 @@ import javax.persistence.Query;
  * Represents a set of query parameters that are supposed to be passed to a
  * {@link Query}.
  *
- * @author Michael Theis (msg)
+ * @author Michael Theis (michael.theis@hm.edu)
  * @version 1.0
- * @since release 18.2
+ * @since release SS2019
  */
 public interface QueryParameters {
     /**

@@ -11,9 +11,9 @@ import java.time.LocalTime;
  * {@code JPA Attribute Converter} to have support for {@code LocalDate}
  * attributes and Oracle {@code DATE} columns.
  *
- * @author Michael Theis (msg)
+ * @author Michael Theis (michael.theis@hm.edu)
  * @version 1.0
- * @since release 18.2
+ * @since release SS2019
  */
 @Converter(autoApply = true)
 public class LocalDateConverter implements AttributeConverter<LocalDate, Timestamp> {

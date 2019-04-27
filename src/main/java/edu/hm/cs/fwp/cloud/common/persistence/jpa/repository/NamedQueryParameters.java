@@ -8,9 +8,9 @@ import java.util.Map;
  * Konkrete Implementierung von {@link QueryParameters}, die benannte Parameter
  * unterstützt.
  *
- * @author Michael Theis (msg)
+ * @author Michael Theis (michael.theis@hm.edu)
  * @version 1.0
- * @since release 18.2
+ * @since release SS2019
  */
 public final class NamedQueryParameters implements QueryParameters {
     private final Map<String, Object> parametersByName;

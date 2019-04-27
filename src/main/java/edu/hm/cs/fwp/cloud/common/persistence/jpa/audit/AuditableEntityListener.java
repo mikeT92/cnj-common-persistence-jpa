@@ -1,6 +1,8 @@
 package edu.hm.cs.fwp.cloud.common.persistence.jpa.audit;
 
+import javax.enterprise.context.Dependent;
 import javax.inject.Inject;
+import javax.inject.Named;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
 import java.security.Principal;
@@ -8,12 +10,13 @@ import java.time.LocalDateTime;
 
 /**
  * {@code JPA lifecycle listener} that tracks creation and modification of
- * {@link AuditableEntity}s.
+ * {@link AbstractAuditableEntity}s.
  *
- * @author Michael Theis (msg)
+ * @author Michael Theis (michael.theis@hm.edu)
  * @version 1.0
- * @since release 18.2
+ * @since release SS2019
  */
+@Named
 public class AuditableEntityListener {
 
     @Inject

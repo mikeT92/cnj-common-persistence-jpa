@@ -21,9 +21,9 @@ import java.util.Objects;
  * </li>
  * </ul>
  *
- * @author Michael Theis (msg)
+ * @author Michael Theis (michael.theis@hm.edu)
  * @version 1.0
- * @since release 18.2
+ * @since release SS2019
  */
 @MappedSuperclass
 @EntityListeners({AuditableEntityListener.class})

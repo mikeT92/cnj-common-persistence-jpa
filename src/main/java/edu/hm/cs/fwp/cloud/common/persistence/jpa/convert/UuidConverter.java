@@ -13,9 +13,9 @@ import java.util.UUID;
  * {@code UUID} attribute values to {@code UUID} db column values.
  * </p>
  *
- * @author Michael Theis (msg)
+ * @author Michael Theis (michael.theis@hm.edu)
  * @version 1.0
- * @since release 18.2
+ * @since release SS2019
  */
 @Converter(autoApply = true)
 public class UuidConverter implements AttributeConverter<UUID, UUID> {

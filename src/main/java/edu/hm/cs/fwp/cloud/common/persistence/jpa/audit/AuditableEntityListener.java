@@ -1,26 +1,30 @@
 package edu.hm.cs.fwp.cloud.common.persistence.jpa.audit;
 
-import javax.enterprise.context.Dependent;
+import javax.enterprise.inject.spi.CDI;
 import javax.inject.Inject;
-import javax.inject.Named;
 import javax.persistence.PrePersist;
 import javax.persistence.PreUpdate;
-import java.security.Principal;
+import javax.security.enterprise.SecurityContext;
 import java.time.LocalDateTime;
 
 /**
  * {@code JPA lifecycle listener} that tracks creation and modification of
  * {@link AbstractAuditableEntity}s.
+ * <p>
+ * <strong>Note:</strong> Due to a known bug in Payara's version of EclipseLink, EclipseLink does
+ * not support CDI in JPA resources as long as AttributeConverters are present. So we have to
+ * use a programmatic lookup of the {@code SecurityContext} if the local field should be {@code null}.
+ * </p>
+ * @see https://github.com/payara/Payara/issues/3720
  *
  * @author Michael Theis (michael.theis@hm.edu)
  * @version 1.0
  * @since release SS2019
  */
-@Named
 public class AuditableEntityListener {
 
     @Inject
-    private Principal principal;
+    private SecurityContext securityContext;
 
     @PrePersist
     public void onPrePersist(AbstractAuditableEntity entity) {
@@ -33,7 +37,22 @@ public class AuditableEntityListener {
     }
 
     private String getAuthenticatedUserId() {
-        return this.principal != null ? this.principal.getName() : "anonymous";
+        String result = "anonymous";
+        if (getSecurityContext().getCallerPrincipal() != null) {
+            result = getSecurityContext().getCallerPrincipal().getName();
+        }
+        return result;
+    }
+
+    /**
+     * Wraps access to {@link #securityContext} in order to perform a programmatic CDI lookup in case
+     * CDI injection didn't happen.
+     */
+    private SecurityContext getSecurityContext() {
+        if (this.securityContext == null) {
+            this.securityContext = CDI.current().select(SecurityContext.class).get();
+        }
+        return this.securityContext;
     }
 
 }
